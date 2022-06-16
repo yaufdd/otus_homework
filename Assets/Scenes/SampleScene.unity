@@ -193,6 +193,11 @@ MonoBehaviour:
     volume: 0.38
     pitch: 1
     source: {fileID: 0}
+  - name: BattleMusic
+    clip: {fileID: 8300000, guid: e7bfe38094ab69d49a0bf42cfab2d78f, type: 3}
+    volume: 0.38
+    pitch: 1
+    source: {fileID: 0}
 --- !u!4 &401739835
 Transform:
   m_ObjectHideFlags: 0
