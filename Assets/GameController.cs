@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
 
 
 public class GameController : MonoBehaviour
@@ -19,9 +20,10 @@ public class GameController : MonoBehaviour
         Turn1,
         Turn2
     }
-
+    
     void Start()
     {
+        FindObjectOfType<AudioManager>().Play("BattleMusic");
         gameisover = false;
         Debug.Log("Health 1: " + player1.health);
         Debug.Log("Health 2: " + player2.health);
@@ -37,10 +39,12 @@ public class GameController : MonoBehaviour
         if (state == State.Turn1)
         {
             Debug.Log("player1 WIN, Player1 HP = " + player1.health + ", Player2 HP = " + player2.health );
+            FindObjectOfType<AudioManager>().Play("Win");
         }
         else
         {
             Debug.Log("player2 WIN, Player2 HP = " + player2.health + ", Player1 HP = " + player1.health );
+            FindObjectOfType<AudioManager>().Play("Lose");
         }
         
         StopCoroutine(turn);
@@ -57,7 +61,11 @@ public class GameController : MonoBehaviour
             
                                            
             yield return new WaitForSeconds(1f);
+            FindObjectOfType<AudioManager>().Play("ShootHit");
+
+            yield return new WaitForSeconds(.5f);
             player2.health -= player1.attack;
+            FindObjectOfType<AudioManager>().Play("TakeDamageShort");
             Debug.Log("player1 shoot!");
             state = State.Turn1;
 
@@ -73,11 +81,15 @@ public class GameController : MonoBehaviour
             
             
             yield return new WaitForSeconds(1f);
-            Debug.Log("player2 run to player1");            
+            Debug.Log("player2 run to player1");
+
+            yield return new WaitForSeconds(.5f);
+            FindObjectOfType<AudioManager>().Play("HandHit");
             
             
             yield return new WaitForSeconds(1f);               
             player1.health -= player2.attack;
+            FindObjectOfType<AudioManager>().Play("TakeDamageShort");
             Debug.Log("player2 attack!");
             state = State.Turn2;
             
@@ -95,10 +107,10 @@ public class GameController : MonoBehaviour
             Debug.Log("player 2 finished turn");
 
 
-            //пункт г мой вариант) сделать маханику удара молнии
-            //которая  с веротностью 75% бьёт по player 2
+            
             yield return new WaitForSeconds(2f);
-            float number = Random.Range(0, 2);
+            float number = Random.Range(0, 1);
+            FindObjectOfType<AudioManager>().Play("Lightning");
             switch (number)
             {
                 case  0f:
@@ -109,10 +121,7 @@ public class GameController : MonoBehaviour
                     player2.health -= 3;
                     Debug.Log("Random Lightning damaged player2! " + number);
                     break;
-                case  2f:
-                    player2.health -= 3;
-                    Debug.Log("Random Lightning damaged player2! " + number);
-                    break;
+               
 
             }
 
