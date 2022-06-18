@@ -59,6 +59,7 @@
      <Compile Include="Assets\ButtonManager.cs" />
      <Compile Include="Assets\contextmenu.cs" />
      <Compile Include="Assets\Couroutine\CharacterComponent.cs" />
+     <Compile Include="Assets\Audio\SoundSettings.cs" />
  <Reference Include="UnityEngine">
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.29f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>
